@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">NotesDemo</string>
+    <string name="notes_title">Notes-Title</string>
+    <string name="title">Title</string>
+    <string name="content_description">       Content Description....</string>
+    <string name="add">Add</string>
+    <string name="update">Update</string>
+    <string name="search">Search Your Notes..</string>
+    <string name="delete">Delete</string>
+    <string name="we_are_creating_a_simple_app_in_which_you_have_add_notes_update_notes_delete_notes_and_search_by_filter">we are creating a simple app
+        in which you have
+        - add notes
+        - update notes
+        - delete notes and search by filter</string>
+    <string name="loadimagefaile">loadimageFaile</string>
+    <string name="title_empty">Title Empty</string>
+    <string name="contant_empty">Content Is Empty</string>
+    <string name="no_data_found">No Data Found</string>
+    <string name="undo_action">Undo action</string>
+    <string name="undo">UNDO</string>
+    <string name="notes_update_successfully">Notes Update Successfully</string>
+    <string name="number">8200615808</string>
+</resources>

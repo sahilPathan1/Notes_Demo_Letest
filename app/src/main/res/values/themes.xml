@@ -1,0 +1,69 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.NotesDemo" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">#020202</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#0088ff</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">#0c0e59</item>
+    </style>
+
+    <style name="MyEditTextStyle" parent="@android:style/TextAppearance.Widget.EditText">
+        <item name="android:background">@color/gray</item> //NO UNDERBAR
+        <item name="android:height">28dp</item> //COMMON HEIGHT
+    </style>
+
+
+  <!--  <style name="AppTheme.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
+        &lt;!&ndash; Primary colors &ndash;&gt;
+        <item name="colorPrimary">#020202</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
+        &lt;!&ndash; Secondary brand color. &ndash;&gt;
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        &lt;!&ndash; Status bar color. &ndash;&gt;
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        &lt;!&ndash; Other attributes &ndash;&gt;
+        &lt;!&ndash; ... &ndash;&gt;
+    </style>
+
+
+
+    <style name="AppTheme.Dark" parent="Theme.MaterialComponents.NoActionBar">
+        &lt;!&ndash; Primary colors &ndash;&gt;
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="colorOnPrimary">@color/black</item>
+        &lt;!&ndash; Secondary brand color. &ndash;&gt;
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/white</item>
+        &lt;!&ndash; Status bar color. &ndash;&gt;
+        <item name="android:statusBarColor">@color/white</item>
+
+        &lt;!&ndash; Other attributes &ndash;&gt;
+        &lt;!&ndash; ... &ndash;&gt;
+    </style>
+-->
+
+    <!-- <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+
+     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />-->
+</resources>

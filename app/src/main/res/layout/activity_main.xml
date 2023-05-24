@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainCOntainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.MainActivity">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/_10dp"
+           android:layout_marginTop="@dimen/_70dp"
+            android:paddingBottom="@dimen/_10dp"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_notes_list" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:indicatorColor="@color/red"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/searchContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimens10dp"
+            android:background="@drawable/edt_corner_design"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtSearch"
+                style="@style/MyEditTextStyle"
+                android:layout_width="@dimen/_0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="@dimen/_10dp"
+                android:background="@drawable/edit_text_corner"
+                android:hint="@string/search"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColorHint="#546E7A"
+                app:boxBackgroundMode="none"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnClear"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="VisualLintTextFieldSize" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/btnClear"
+                android:layout_width="@dimen/_20dp"
+                android:layout_height="@dimen/_20dp"
+                android:layout_marginEnd="@dimen/dimens5dp"
+                android:background="@drawable/closee"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/edtSearch"
+                app:layout_constraintEnd_toStartOf="@id/icon_layoutChanger"
+                app:layout_constraintStart_toEndOf="@id/edtSearch"
+                app:layout_constraintTop_toTopOf="@id/edtSearch" />
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/icon_layoutChanger"
+                android:layout_width="@dimen/_20dp"
+                android:layout_height="@dimen/_20dp"
+                android:layout_marginStart="@dimen/_5dp"
+                android:layout_marginEnd="@dimen/_10dp"
+                android:src="@drawable/grid"
+                app:layout_constraintBottom_toBottomOf="@id/btnClear"
+                app:layout_constraintStart_toEndOf="@id/btnClear"
+                app:layout_constraintTop_toTopOf="@id/btnClear" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/topArrow"
+                android:layout_width="@dimen/_20dp"
+                android:layout_height="@dimen/_20dp"
+                android:layout_marginStart="@dimen/_5dp"
+                android:layout_marginEnd="@dimen/_10dp"
+                android:src="@drawable/bottomtotop"
+                app:layout_constraintBottom_toBottomOf="@+id/icon_layoutChanger"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/icon_layoutChanger"
+                app:layout_constraintTop_toTopOf="@+id/icon_layoutChanger"
+                tools:ignore="ImageContrastCheck,ImageContrastCheck" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/notesContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimens10dp"
+            android:background="@drawable/container_border"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/addClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5dp"
+                android:layout_marginBottom="@dimen/_50dp"
+                android:contentDescription="@string/loadimagefaile"
+                android:onClick="addContainerClose"
+                android:src="@drawable/baseline_cancel_24"
+                app:layout_constraintBottom_toBottomOf="@+id/titleContainer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/titleContainer"
+                app:layout_constraintTop_toTopOf="@+id/titleContainer" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/titleContainer"
+                style="@style/MyEditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimens20dp"
+                android:layout_marginTop="@dimen/dimens50dp"
+                android:background="@drawable/edt_corner_design"
+                android:padding="@dimen/dimens5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtNotesTitle"
+                    style="@style/MyEditTextStyle"
+                    android:layout_width="@dimen/dimen0dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/edit_text_corner"
+                    android:hint="@string/title"
+                    android:paddingStart="@dimen/dimens20dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/lightGray"
+                    android:textSize="@dimen/dimens30sp"
+                    app:boxBackgroundMode="none"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/contentContainer"
+                style="@style/MyEditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200dp"
+                android:layout_margin="@dimen/dimens20dp"
+                android:background="@drawable/edt_corner_design"
+                android:padding="@dimen/dimens5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleContainer">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtNotesContent"
+                    style="@style/MyEditTextStyle"
+                    android:layout_width="@dimen/dimen0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_20dp"
+                    android:background="@drawable/edit_text_corner"
+                    android:hint="@string/content_description"
+                    android:textSize="@dimen/dimens15sp"
+                    app:boxBackgroundMode="none"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dims_20dp"
+                android:layout_marginTop="@dimen/dimens10dp"
+                android:layout_marginBottom="@dimen/dimens10dp"
+                android:backgroundTint="@color/notesBackground"
+                android:text="@string/add"
+                android:textSize="@dimen/dimens20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/contentContainer"
+                tools:layout_editor_absoluteX="20dp" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/notesUpdateContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimens10dp"
+            android:background="@drawable/container_border"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/updateClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5dp"
+                android:layout_marginBottom="@dimen/_50dp"
+                android:contentDescription="@string/content_description"
+                android:onClick="updateContainerClose"
+                android:src="@drawable/baseline_cancel_24"
+                app:layout_constraintBottom_toBottomOf="@+id/titleUpdateContainer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/titleUpdateContainer"
+                app:layout_constraintTop_toTopOf="@+id/titleUpdateContainer" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/titleUpdateContainer"
+                style="@style/MyEditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimens20dp"
+                android:layout_marginTop="@dimen/dimens50dp"
+                android:background="@drawable/edt_corner_design"
+                android:padding="@dimen/dimens5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtUpdateNotesTitle"
+                    style="@style/MyEditTextStyle"
+                    android:layout_width="@dimen/dimen0dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/edit_text_corner"
+                    android:hint="@string/title"
+                    android:paddingStart="@dimen/dimens10dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/DarkGray"
+                    android:textSize="@dimen/dimens20sp"
+                    app:boxBackgroundMode="none"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/contentUpdateContainer"
+                style="@style/MyEditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="@dimen/dimens20dp"
+                android:background="@drawable/edt_corner_design"
+                android:padding="@dimen/dimens5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleUpdateContainer">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtUpdateNotesContent"
+                    style="@style/MyEditTextStyle"
+                    android:layout_width="@dimen/dimen0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/edit_text_corner"
+                    android:hint="@string/content_description"
+                    android:textSize="@dimen/dimens15sp"
+                    app:boxBackgroundMode="none"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.093" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnUpdate"
+                android:layout_width="@dimen/_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dims_20dp"
+                android:layout_marginTop="@dimen/dimens10dp"
+                android:layout_marginBottom="@dimen/dimens10dp"
+                android:backgroundTint="@color/notesBackground"
+                android:text="@string/update"
+                android:textAllCaps="false"
+                android:textSize="@dimen/dimens20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnUpdateDelete"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/contentUpdateContainer" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnUpdateDelete"
+                android:layout_width="@dimen/_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dims_20dp"
+                android:backgroundTint="@color/notesBackground"
+                android:text="@string/delete"
+                android:textAllCaps="false"
+                android:textSize="@dimen/dimens20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/btnUpdate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnUpdate"
+                app:layout_constraintTop_toTopOf="@+id/btnUpdate" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomSheet"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200dp"
+            android:background="@drawable/bottom_sheet_style"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="@dimen/_30dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ExtraText">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/addNotes"
+                    android:layout_width="@dimen/_45dp"
+                    android:layout_height="@dimen/_45dp"
+                    android:layout_marginStart="@dimen/_50dp"
+                    android:layout_marginTop="@dimen/_20dp"
+                    android:src="@drawable/addnotes"
+                    app:layout_constraintEnd_toStartOf="@id/switchTheme"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/switchTheme"
+                    android:layout_width="@dimen/_50dp"
+                    android:layout_height="@dimen/_45dp"
+                    android:src="@drawable/whitecircle"
+                    android:layout_marginStart="@dimen/_50dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/addNotes"
+                    app:layout_constraintEnd_toStartOf="@id/setting"
+                    app:layout_constraintStart_toEndOf="@+id/addNotes"
+                    app:layout_constraintTop_toTopOf="@+id/addNotes"/>
+
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/setting"
+                    android:layout_width="@dimen/_45dp"
+                    android:layout_height="@dimen/_45dp"
+                    android:layout_marginStart="@dimen/_50dp"
+                    android:layout_marginEnd="@dimen/_50dp"
+                    android:src="@drawable/settings"
+                    app:layout_constraintBottom_toBottomOf="@+id/switchTheme"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/switchTheme"
+                    app:layout_constraintTop_toTopOf="@+id/switchTheme" />
+
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/contactUs"
+                    android:layout_width="@dimen/_45dp"
+                    android:layout_height="@dimen/_45dp"
+                    android:layout_marginTop="@dimen/_20dp"
+                    android:src="@drawable/contactus"
+                    app:layout_constraintEnd_toEndOf="@+id/addNotes"
+                    app:layout_constraintStart_toStartOf="@+id/addNotes"
+                    app:layout_constraintTop_toBottomOf="@+id/addNotes" />
+
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/aboutUs"
+                    android:layout_width="@dimen/_45dp"
+                    android:layout_height="@dimen/_45dp"
+                    android:layout_marginStart="@dimen/_70dp"
+                    android:src="@drawable/aboutus"
+                    app:layout_constraintBottom_toBottomOf="@+id/contactUs"
+                    app:layout_constraintEnd_toEndOf="@+id/switchTheme"
+                    app:layout_constraintStart_toEndOf="@+id/contactUs"
+                    app:layout_constraintTop_toTopOf="@+id/contactUs"
+                    app:layout_constraintVertical_bias="1.0" />
+
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/closeApp"
+                    android:layout_width="@dimen/_45dp"
+                    android:layout_height="@dimen/_45dp"
+                    android:src="@drawable/closeapp"
+                    android:onClick="closeApp"
+                    app:layout_constraintBottom_toBottomOf="@+id/aboutUs"
+                    app:layout_constraintEnd_toEndOf="@+id/setting"
+                    android:layout_marginStart="@dimen/_50dp"
+                    app:layout_constraintStart_toEndOf="@+id/aboutUs"
+                    app:layout_constraintTop_toTopOf="@+id/aboutUs"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

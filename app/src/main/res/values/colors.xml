@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0088ff</color>
+    <color name="colorPrimaryDark">#005ccb</color>
+    <color name="colorAccent">#0c0e59</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="lightGray">#dfdce0</color>
+    <color name="lightDarkGray">#61969697</color>
+    <color name="logoutColor">#ecc4c4</color>
+    <color name="BorderColor">#23263e</color>
+    <color name="green">#3CDD18</color>
+    <color name="DarkGray">#A3A3A3</color>
+    <color name="red">#DF0D0D</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="tvDescriptionColor">#757786</color>
+    <color name="blue">#1d2039</color>
+    <color name="notesContainer">#6a152e</color>
+    <color name="notesBackground">#c2274e</color>
+
+
+    <color name="loginBg">#1b1e37</color>
+    <color name="tabColor">#fcead2</color>
+    <color name="colorRole">#fff4e8</color>
+    <color name="navy">#3a3e53</color>
+    <color name="yello">#DAA76C</color>
+    <color name="Darkkyellow">#E37D08</color>
+    <color name="yellowLight">#E0B17A</color>
+    <color name="darkYellow">#cbae94</color>
+    <color name="lightYellow">#ffebd5</color>
+    <color name="darkGray">#494C4C</color>
+    <color name="gray">#eff4f3</color>
+</resources>
