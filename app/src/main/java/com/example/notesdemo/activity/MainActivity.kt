@@ -17,7 +17,6 @@ import android.view.animation.TranslateAnimation
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -27,9 +26,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.room.Room
 import com.example.notesdemo.R
 import com.example.notesdemo.adapter.NotesAdapter
-import com.example.notesdemo.animation.BtnAnimation
 import com.example.notesdemo.databinding.ActivityMainBinding
-import com.example.notesdemo.`interface`.MyListener
 import com.example.notesdemo.model.NotesModel
 import com.example.notesdemo.roomdatabaseclass.NoteDatabase
 import com.google.android.material.snackbar.Snackbar
@@ -39,29 +36,29 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 
-@Suppress("IMPLICIT_CAST_TO_ANY")
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    lateinit var noteDatabase: NoteDatabase
+    private lateinit var noteDatabase: NoteDatabase
     private lateinit var noteAdapter: NotesAdapter
-    private lateinit var btnAnimation: BtnAnimation
-    private val REQUEST_PHONE_CALL = 1
+    private val requestPhoneCall = 1
     val listNew: ArrayList<NotesModel> = ArrayList()
     var title = ""
-    var content = ""
-    var positionItemRv = ""
-    var isClick = false
+    private var content = ""
+    private var positionItemRv = ""
+    private var isClick = false
     var isLayoutGrid = false
-    var ti = ""
-    var des = ""
-    var isZoomInOut = false
-    var isThemeChange = false
+    private var ti = ""
+    private var des = ""
+    private var isZoomInOut = false
+    private var isThemeChange = false
     var isBottomSheet = false
     var serviceName: String = ""
-    var phoneNumber = R.string.number
+    private var phoneNumber = R.string.number
     lateinit var list: ArrayList<NotesModel>
 
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -72,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         binding.addNotes.setOnClickListener {
             binding.apply {
                 notesContainer.visibility = View.VISIBLE
+                searchContainer.visibility = View.GONE
                 openCloseBottomSheet(true)
                 notesUpdateContainer.visibility = View.GONE
                 rvItem.visibility = View.GONE
@@ -140,8 +138,8 @@ class MainActivity : AppCompatActivity() {
                         setLayout(2)
                     }
 
-                    noteAdapter = NotesAdapter(applicationContext, listNew) { pos, image ->
-                        clickRvItem(pos, listNew, image)
+                    noteAdapter = NotesAdapter(applicationContext, listNew) { pos, _ ->
+                        clickRvItem(pos, listNew)
                     }
 
                     /*   noteAdapter.setOnItemClickListener(this@MainActivity)*/
@@ -191,7 +189,7 @@ class MainActivity : AppCompatActivity() {
                 ActivityCompat.requestPermissions(
                     this@MainActivity,
                     arrayOf(android.Manifest.permission.CALL_PHONE),
-                    REQUEST_PHONE_CALL
+                    requestPhoneCall
                 )
             } else {
                 val phoneIntent = Intent(Intent.ACTION_CALL)
@@ -266,7 +264,6 @@ class MainActivity : AppCompatActivity() {
                 getAllNotes()
             }
         }
-
     }
 
     private fun openCloseBottomSheet(result: Boolean) {
@@ -317,6 +314,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun getAllNotes() {
         noteDatabase.noteDao().getAll().observe(this) {
             list = ArrayList()
@@ -325,8 +323,8 @@ class MainActivity : AppCompatActivity() {
             setLayout(2)
             list.addAll(it)
 
-            noteAdapter = NotesAdapter(applicationContext, list) { pos, image ->
-                clickRvItem(pos, list, image)
+            noteAdapter = NotesAdapter(applicationContext, list) { pos, _ ->
+                clickRvItem(pos, list)
             }
             Log.d("Data===================", list.size.toString())
             binding.rvItem.adapter = noteAdapter
@@ -337,7 +335,7 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("NotifyDataSetChanged", "ClickableViewAccessibility")
     @OptIn(DelicateCoroutinesApi::class)
-    private fun clickRvItem(pos: Int, list: ArrayList<NotesModel>, image: View) {
+    private fun clickRvItem(pos: Int, list: ArrayList<NotesModel>) {
 
         if (isBottomSheet) {
             isBottomSheet = true
@@ -460,6 +458,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun closeApp(view: View) {
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
+
     }
 }
