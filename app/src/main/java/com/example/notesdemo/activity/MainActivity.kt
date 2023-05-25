@@ -215,12 +215,12 @@ class MainActivity : AppCompatActivity() {
                 layoutParams.width = 1080 // Set the desired width in pixels
                 layoutParams.height = 1000 // Set the desired height in pixels
                 binding.mainContainer.layoutParams = layoutParams
-            }else{
+            } else {
                 isZoomInOut = false
                 binding.zoomInOut.setImageResource(R.drawable.zoomout)
                 val layoutParams = binding.mainContainer.layoutParams
                 layoutParams.width = 1080 // Set the desired width in pixels
-                layoutParams.height = 2150 // Set the desired height in pixels
+                layoutParams.height = 2200 // Set the desired height in pixels
                 binding.mainContainer.layoutParams = layoutParams
             }
         }
@@ -252,7 +252,6 @@ class MainActivity : AppCompatActivity() {
                 layoutParams.gravity = Gravity.TOP
                 snackbar.setBackgroundTint(Color.RED).show()
             } else {
-
                 GlobalScope.launch {
                     noteDatabase.noteDao().insert(
                         NotesModel(
