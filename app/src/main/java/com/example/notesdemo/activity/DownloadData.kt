@@ -19,8 +19,6 @@ import com.itextpdf.text.pdf.PdfWriter
 import java.io.FileOutputStream
 
 class DownloadData : AppCompatActivity() {
-    var pageHeight = 1120
-    var pageWidth = 792
     lateinit var bmp: Bitmap
     lateinit var scaledbmp: Bitmap
     var PERMISSION_CODE = 101
@@ -83,8 +81,6 @@ class DownloadData : AppCompatActivity() {
         }catch (e:java.lang.Exception){
             Toast.makeText(this, "error$e", Toast.LENGTH_SHORT).show()
         }
-
-        val text = "This is a sample PDF document!"
         val paragraph = Paragraph(title.toString() +"\\\n"+ description.toString())
         document.add(paragraph)
         document.close()
