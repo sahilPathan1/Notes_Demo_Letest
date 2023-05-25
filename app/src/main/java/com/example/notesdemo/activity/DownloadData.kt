@@ -4,10 +4,8 @@ import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.content.pm.PackageManager
 import android.graphics.*
-import android.graphics.pdf.PdfDocument
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -15,7 +13,9 @@ import androidx.databinding.DataBindingUtil
 import com.example.notesdemo.R
 import com.example.notesdemo.databinding.ActivityDownloadDataBinding
 import com.google.android.material.snackbar.Snackbar
-import java.io.File
+import com.itextpdf.text.Document
+import com.itextpdf.text.Paragraph
+import com.itextpdf.text.pdf.PdfWriter
 import java.io.FileOutputStream
 
 class DownloadData : AppCompatActivity() {
@@ -49,49 +49,23 @@ class DownloadData : AppCompatActivity() {
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
                     // on below line we are calling generate
                     // PDF method to generate our PDF file.
-                    generatePDF(title, description)
+                  /*  generatePDF(title, description)*/
+
+                    generatePdfDocument(title,description)
                 }
             }
-
         }
     }
 
-    private fun generatePDF(title: String?, description: String?) {
-        var pdfDocument: PdfDocument = PdfDocument()
+    private fun generatePdfDocument(title: String?, description: String?) {
+        val document = Document()
 
-        var paint: Paint = Paint()
-        var title: Paint = Paint()
+        val fileName = "sample.pdf"
+        val filePath = getExternalFilesDir(null)?.absolutePath + "/" + fileName
 
-        var myPageInfo: PdfDocument.PageInfo? =
-            PdfDocument.PageInfo.Builder(pageWidth, pageHeight, 1).create()
-
-        var myPage: PdfDocument.Page = pdfDocument.startPage(myPageInfo)
-
-        var canvas: Canvas = myPage.canvas
-
-        canvas.drawBitmap(scaledbmp, 56F, 40F, paint)
-
-        title.typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
-
-        title.textSize = 15F
-
-        title.color = ContextCompat.getColor(this, R.color.purple_200)
-
-        canvas.drawText(title.toString(), 209F, 100F, title)
-        canvas.drawText(description.toString(), 209F, 80F,title)
-        title.typeface = Typeface.defaultFromStyle(Typeface.NORMAL)
-        title.color = ContextCompat.getColor(this, R.color.purple_200)
-        title.textSize = 15F
-
-        title.textAlign = Paint.Align.CENTER
-        canvas.drawText("This is sample document which we have created.", 396F, 560F, title)
-        pdfDocument.finishPage(myPage)
-
-        val fileOp  = File(applicationContext.getExternalFilesDir(null), "Demo.pdf")
-
-        try {
-            pdfDocument.writeTo(FileOutputStream(fileOp))
-
+        try{
+            PdfWriter.getInstance(document, FileOutputStream(filePath))
+            document.open()
             val snackbar = Snackbar.make(
                 findViewById(R.id.btnDownload),
                 getString(R.string.genrate),
@@ -106,26 +80,16 @@ class DownloadData : AppCompatActivity() {
             snackbar.setActionTextColor(Color.WHITE)
             snackbar.show()
 
-        } catch (e: Exception) {
-
-            val snackbar = Snackbar.make(
-                findViewById(R.id.btnDownload),
-                getString(R.string.error),
-                Snackbar.LENGTH_SHORT
-            )
-            snackbar.setAction(
-                R.string.undo
-            ) {
-                Toast.makeText(applicationContext, R.string.undo_action, Toast.LENGTH_SHORT).show()
-            }
-            snackbar.setBackgroundTint(Color.RED)
-            snackbar.setActionTextColor(Color.WHITE)
-            snackbar.show()
-            e.printStackTrace()
+        }catch (e:java.lang.Exception){
+            Toast.makeText(this, "error$e", Toast.LENGTH_SHORT).show()
         }
 
-        pdfDocument.close()
+        val text = "This is a sample PDF document!"
+        val paragraph = Paragraph(title.toString() +"\\\n"+ description.toString())
+        document.add(paragraph)
+        document.close()
     }
+
 
     private fun requestPermission() {
         ActivityCompat.requestPermissions(
@@ -133,6 +97,7 @@ class DownloadData : AppCompatActivity() {
             arrayOf(READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE), PERMISSION_CODE
         )
     }
+
 
     private fun checkPermissions(): Boolean {
         var writeStoragePermission = ContextCompat.checkSelfPermission(
