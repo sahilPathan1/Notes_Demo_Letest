@@ -16,7 +16,7 @@
         android:backgroundTint="@color/white"
         android:color="@android:color/transparent"
         app:cardCornerRadius="@dimen/_8dp"
-        app:strokeColor="@color/red"
+        app:strokeColor="@color/darkGreen"
         app:strokeWidth="@dimen/_1dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,7 +33,7 @@
                 android:textColor="@color/blue"
                 android:textSize="@dimen/dimens25sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/downloadDoc"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,6 +51,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvTitle"
                 tools:ignore="TextSizeCheck" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/downloadDoc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/downlod"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvTitle"
+                app:layout_constraintTop_toTopOf="@+id/tvTitle" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

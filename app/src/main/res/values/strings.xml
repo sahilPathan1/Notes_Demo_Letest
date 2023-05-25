@@ -20,4 +20,7 @@
     <string name="undo">UNDO</string>
     <string name="notes_update_successfully">Notes Update Successfully</string>
     <string name="number">8200615808</string>
+    <string name="titlee">Title</string>
+    <string name="genrate">PFD file genrated ...</string>
+    <string name="error">Fail to generate PDF file..</string>
 </resources>

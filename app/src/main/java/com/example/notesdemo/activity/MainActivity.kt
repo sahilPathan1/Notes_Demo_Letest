@@ -28,6 +28,7 @@ import com.example.notesdemo.R
 import com.example.notesdemo.adapter.NotesAdapter
 import com.example.notesdemo.animation.BtnAnimation
 import com.example.notesdemo.databinding.ActivityMainBinding
+import com.example.notesdemo.`interface`.MyListener
 import com.example.notesdemo.model.NotesModel
 import com.example.notesdemo.roomdatabaseclass.NoteDatabase
 import com.google.android.material.snackbar.Snackbar
@@ -137,9 +138,11 @@ class MainActivity : AppCompatActivity() {
                         setLayout(2)
                     }
 
-                    noteAdapter = NotesAdapter(this@MainActivity, listNew) { pos ->
-                        clickRvItem(pos, listNew)
+                    noteAdapter = NotesAdapter(applicationContext, listNew) { pos,image ->
+                        clickRvItem(pos, listNew, image)
                     }
+
+                 /*   noteAdapter.setOnItemClickListener(this@MainActivity)*/
                     binding.rvItem.adapter = noteAdapter
                 } else {
                     binding.btnClear.visibility = View.GONE
@@ -205,7 +208,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this,AboutUs::class.java))
 
         }
-
         binding.btnAdd.setOnClickListener {
             title = binding.edtNotesTitle.text.toString()
             content = binding.edtNotesContent.text.toString()
@@ -249,6 +251,7 @@ class MainActivity : AppCompatActivity() {
                 getAllNotes()
             }
         }
+
     }
 
     private fun openCloseBottomSheet(result: Boolean) {
@@ -299,7 +302,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     private fun getAllNotes() {
         noteDatabase.noteDao().getAll().observe(this) {
             list = ArrayList()
@@ -308,8 +310,8 @@ class MainActivity : AppCompatActivity() {
             setLayout(2)
             list.addAll(it)
 
-            noteAdapter = NotesAdapter(applicationContext, list) { pos ->
-                clickRvItem(pos, list)
+            noteAdapter = NotesAdapter(applicationContext,list){ pos,image ->
+                clickRvItem(pos, list,image)
             }
             Log.d("Data===================", list.size.toString())
             binding.rvItem.adapter = noteAdapter
@@ -320,7 +322,7 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("NotifyDataSetChanged", "ClickableViewAccessibility")
     @OptIn(DelicateCoroutinesApi::class)
-    private fun clickRvItem(pos: Int, list: ArrayList<NotesModel>) {
+    private fun clickRvItem(pos: Int, list: ArrayList<NotesModel>, image: View) {
 
         if (isBottomSheet) {
             isBottomSheet = true
@@ -338,7 +340,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.edtUpdateNotesTitle.setText(list[pos].title)
         binding.edtUpdateNotesContent.setText(list[pos].description)
-        
+
         binding.btnUpdate.setOnClickListener {
             binding.searchContainer.visibility = View.VISIBLE
             ti = binding.edtUpdateNotesTitle.text.toString()
@@ -411,7 +413,6 @@ class MainActivity : AppCompatActivity() {
                 snackbar.show()
             }
         }
-
         binding.rvItem.visibility = View.GONE
         binding.notesUpdateContainer.visibility = View.VISIBLE
     }
@@ -442,4 +443,9 @@ class MainActivity : AppCompatActivity() {
     fun closeApp(view: View) {
         onBackPressed()
     }
+
+    /*   override fun onItemClick(data: NotesModel, pos: Int) {
+           Toast.makeText(this, "this"+data.title, Toast.LENGTH_SHORT).show()
+           Toast.makeText(this, "this"+data.description, Toast.LENGTH_SHORT).show()
+       }*/
 }
