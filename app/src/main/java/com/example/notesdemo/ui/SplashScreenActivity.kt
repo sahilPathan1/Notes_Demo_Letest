@@ -12,7 +12,6 @@ import com.example.notesdemo.databinding.ActivitySplashBinding
 
 class SplashScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
-    var flag = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
@@ -28,7 +27,7 @@ class SplashScreenActivity : AppCompatActivity() {
                 // this activity will not show when user closes MainActivity
                 finish()
 
-            }, 6000)
+            }, 3900)
 
             animationView.setAnimation(R.raw.sp)
             animationViewWelcome.setAnimation(R.raw.welcomee)

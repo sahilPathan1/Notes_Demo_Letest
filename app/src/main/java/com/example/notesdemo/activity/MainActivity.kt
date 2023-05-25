@@ -17,6 +17,7 @@ import android.view.animation.TranslateAnimation
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -53,6 +54,7 @@ class MainActivity : AppCompatActivity() {
     var isLayoutGrid = false
     var ti = ""
     var des = ""
+    var isZoomInOut = false
     var isThemeChange = false
     var isBottomSheet = false
     var serviceName: String = ""
@@ -138,11 +140,11 @@ class MainActivity : AppCompatActivity() {
                         setLayout(2)
                     }
 
-                    noteAdapter = NotesAdapter(applicationContext, listNew) { pos,image ->
+                    noteAdapter = NotesAdapter(applicationContext, listNew) { pos, image ->
                         clickRvItem(pos, listNew, image)
                     }
 
-                 /*   noteAdapter.setOnItemClickListener(this@MainActivity)*/
+                    /*   noteAdapter.setOnItemClickListener(this@MainActivity)*/
                     binding.rvItem.adapter = noteAdapter
                 } else {
                     binding.btnClear.visibility = View.GONE
@@ -200,13 +202,27 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.aboutUs.setOnClickListener {
-            /*  val layoutParams = binding.bottomSheet.layoutParams
-                layoutParams.width = 500 // Set the desired width in pixels
-                layoutParams.height = 700 // Set the desired height in pixels
-                binding.mainCOntainer.layoutParams = layoutParams*/
             openCloseBottomSheet(true)
-            startActivity(Intent(this,AboutUs::class.java))
+            startActivity(Intent(this, AboutUs::class.java))
 
+        }
+        binding.zoomInOut.setOnClickListener {
+
+            if (!isZoomInOut) {
+                isZoomInOut = true
+                binding.zoomInOut.setImageResource(R.drawable.zoominn)
+                val layoutParams = binding.mainContainer.layoutParams
+                layoutParams.width = 1080 // Set the desired width in pixels
+                layoutParams.height = 1000 // Set the desired height in pixels
+                binding.mainContainer.layoutParams = layoutParams
+            }else{
+                isZoomInOut = false
+                binding.zoomInOut.setImageResource(R.drawable.zoomout)
+                val layoutParams = binding.mainContainer.layoutParams
+                layoutParams.width = 1080 // Set the desired width in pixels
+                layoutParams.height = 2150 // Set the desired height in pixels
+                binding.mainContainer.layoutParams = layoutParams
+            }
         }
         binding.btnAdd.setOnClickListener {
             title = binding.edtNotesTitle.text.toString()
@@ -310,8 +326,8 @@ class MainActivity : AppCompatActivity() {
             setLayout(2)
             list.addAll(it)
 
-            noteAdapter = NotesAdapter(applicationContext,list){ pos,image ->
-                clickRvItem(pos, list,image)
+            noteAdapter = NotesAdapter(applicationContext, list) { pos, image ->
+                clickRvItem(pos, list, image)
             }
             Log.d("Data===================", list.size.toString())
             binding.rvItem.adapter = noteAdapter
@@ -405,7 +421,11 @@ class MainActivity : AppCompatActivity() {
                 snackbar.setAction(
                     getString(R.string.undo)
                 ) {
-                    Toast.makeText(applicationContext, getString(R.string.undo_action), Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        applicationContext,
+                        getString(R.string.undo_action),
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                 }
                 snackbar.setBackgroundTint(Color.RED)
@@ -443,9 +463,4 @@ class MainActivity : AppCompatActivity() {
     fun closeApp(view: View) {
         onBackPressed()
     }
-
-    /*   override fun onItemClick(data: NotesModel, pos: Int) {
-           Toast.makeText(this, "this"+data.title, Toast.LENGTH_SHORT).show()
-           Toast.makeText(this, "this"+data.description, Toast.LENGTH_SHORT).show()
-       }*/
 }
